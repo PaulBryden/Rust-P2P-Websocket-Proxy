@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket Client</title>
+    </head>
+    <body>
+        <script>
+            // Define the room ID and the WebSocket server URL
+            const roomID = 'my_room_id';
+            const url = `ws://127.0.0.1:3012/${roomID}`;
+
+            // Create a new WebSocket connection
+            const ws = new WebSocket(url);
+
+            // Define an event handler for when the connection is established
+            ws.onopen = () => {
+                console.log('Connected to server');
+                // Send a test message to the server
+                ws.send("Test_Message");
+            };
+
+            // Define an event handler for receiving messages from the server
+            ws.onmessage = (event) => {
+                console.log(`Received message: ${event.data}`);
+            };
+
+            // Define an event handler for when the connection is closed
+            ws.onclose = (event) => {
+                console.log(`Connection closed with code ${event.code} and reason ${event.reason}`);
+            };
+
+            // Define an event handler for when an error occurs
+            ws.onerror = (error) => {
+                console.log(`Error: ${error}`);
+            };
+        </script>
+    </body>
+</html>
